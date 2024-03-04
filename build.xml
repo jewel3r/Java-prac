@@ -2,9 +2,11 @@
 <sql driver="org.postgresql.Driver"
      url="jdbc:postgresql://localhost:5432/postgres"
      userid="postgres"
-     password="1">
+     password="1"
+	 print="true">
 	
 	<transaction  src="init.sql"/>
 	<transaction  src="fill.sql"/>
+	<transaction  src="showandclear.sql"/>
 </sql>
 </project>
