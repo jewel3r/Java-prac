@@ -1,0 +1,10 @@
+<project name="spasite">
+<sql driver="org.postgresql.Driver"
+     url="jdbc:postgresql://localhost:5432/postgres"
+     userid="postgres"
+     password="1">
+	
+	<transaction  src="init.sql"/>
+	<transaction  src="fill.sql"/>
+</sql>
+</project>
