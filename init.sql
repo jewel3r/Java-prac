@@ -12,7 +12,8 @@ create table if not exists clients (
 	contacts text,
 	address text,
 	phone text[],
-	email text
+	email text,
+	birth_date date
 );
 
 create table if not exists employees (
@@ -22,7 +23,8 @@ create table if not exists employees (
 	phone text,
 	email text,
 	education text,
-	workplace integer references workplaces (w_id)
+	workplace integer references workplaces (w_id),
+	birth_date date
 );
 
 create table if not exists services (
@@ -35,5 +37,6 @@ create table if not exists contracts (
 	contract_id serial primary key,
 	client_id integer references clients (client_id),
 	emp_id integer references employees (emp_id),
-	serv_id integer references services (serv_id)
+	serv_id integer references services (serv_id),
+	sign_date date
 )
