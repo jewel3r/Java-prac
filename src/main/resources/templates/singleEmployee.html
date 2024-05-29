@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Информация о сотруднике</title>
+</head>
+
+<body>
+<div th:replace="fragments/headerMenu :: page-header"> </div>
+
+<div class="indent">
+    <div id="employeeInfo">
+        <h4 th:text="${employee.getName()}"></h4>
+        <p th:if="${employee.getName() != null}" th:text="'Имя сотрудника: ' + ${employee.getName()}"></p>
+        <p th:if="${employee.getAddress() != null}" th:text="'Адрес: ' + ${employee.getAddress()}"></p>
+        <p th:if="${employee.getPhone() != null}" th:text="'Телефон: ' + ${employee.getPhone()}"></p>
+        <p th:if="${employee.getEmail() != null}" th:text="'Email: ' + ${employee.getEmail()}"></p>
+        <p th:if="${employee.getEducation() != null}" th:text="'Образование: ' + ${employee.getEducation()}"></p>
+        <p th:if="${employee.getWorkplace() != null}" th:text="'Должность: ' + ${employee.getWorkplace().getName()}"></p>
+        <p th:if="${employee.getBirthDate() != null}" th:text="'Дата рождения: ' + ${employee.getBirthDate()}"></p>
+
+        <!--
+        <p> Места проживания:&nbsp <span th:if="${person2placeService.getAllPersonsPlaces(person.getId()) == null}">нет</span>
+            <a th:each="place, iter: ${person2placeService.getAllPersonsPlaces(person.getId())}" th:href="'/place?placeId=' + ${place.getId()}">
+                <span th:text="${place.getName()} + ${!iter.last ? ',' : ''}"></span>
+            </a>
+        </p>
+        -->
+    </div>
+    <!--edit delete order button group-->
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <form style="margin-right: 30px" method="get" action="/editEmployee">
+                <input type="hidden" name="employeeId" th:value="${employee.getId()}"/>
+                <button id="editButton" type="submit" class="btn btn-secondary">Редактировать</button>
+            </form>
+            <form method="post" action="/removeEmployee">
+                <input type="hidden" name="employeeId" th:value="${employee.getId()}"/>
+                <button id="deleteButton" type="submit" class="btn btn-secondary">Удалить</button>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

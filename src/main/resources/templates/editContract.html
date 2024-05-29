@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Информация о соглашении</title>
+</head>
+
+<body>
+<div th:replace="fragments/headerMenu :: page-header"> </div>
+
+<div class="indent">
+    <form method="post" action="/saveContract">
+
+        <input type="hidden" id="contractId" name="contractId" required th:value="${contract.getId()}">
+        <label for="clientId">Имя клиента:</label><select class="form-control" id="clientId" name="clientId">
+        <option th:each="wp : ${clientDAO.getAllSortedById()}"
+                th:value="${wp.id}"
+                th:text="${wp.clientName}"
+                th:selected="1"></option>
+    </select>
+        <label for="employeeId">Имя сотрудника:</label><select class="form-control" id="employeeId" name="employeeId">
+        <option th:each="wp : ${employeeDAO.getAllSortedById()}"
+                th:value="${wp.id}"
+                th:text="${wp.name}"
+                th:selected="1"></option>
+    </select>
+        <label for="serviceId">Вид услуг:</label><select class="form-control" id="serviceId" name="serviceId">
+        <option th:each="wp : ${serviceDAO.getAllSortedById()}"
+                th:value="${wp.id}"
+                th:text="${wp.name}"
+                th:selected="1"></option>
+    </select>
+        <label for="signDate">Дата подписания соглашения:</label><br>
+        <input type="date" id="signDate" name="signDate" required th:value="${#dates.format(contract.getSignDate(), 'yyyy-dd-MM')}"><br><br>
+
+        <input id="submitButton" type="submit" value="Сохранить" class="btn btn-primary">
+        <button th:onclick="|window.location.href='@{/contracts}'|"
+                id="cancelButton" type="submit" name="action" value="cancel" class="btn btn-primary">
+            Отменить
+        </button>
+    </form>
+    <!--edit delete order button group-->
+
+
+</div>
+
+</body>
+</html>
